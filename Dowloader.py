@@ -1,5 +1,4 @@
 import os
-import shutil
 from youtube_dl import YoutubeDL
 
 
@@ -10,8 +9,9 @@ class Downloader:
 
         desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
         self.folderName = "Music_Downloads"
-
         self.downloadPath = desktop + "/" + self.folderName
+        self.downloadPath = self.clean(self.downloadPath)
+
         self.ffmpegPath = "c:/Users/Xavi/Downloads/ffmpeg-5.1-essentials_build/bin"
         self.options = {
             "format": "bestaudio/best",
@@ -67,13 +67,18 @@ class Downloader:
     def move(self, file_name, path):
         dest = self.downloadPath + "/" + file_name
 
-        dest = dest.replace("\\", "/")
-        path = path.replace("\\", "/")
+        dest = self.clean(dest)
+        path = self.clean(path)
 
-        os.mkdir("C:/Users/Xavi/Desktop/Music_Downloads")
+        try:
+            os.mkdir(self.downloadPath)
+        except FileExistsError:
+            pass
+
         os.rename(path, dest)
-        #os.replace(path, dest)
-        #shutil.move(path, dest)
+
+    def clean(self, path):
+        return path.replace("\\", "/")
 
 
 class DownloaderError(Exception):
