@@ -1,4 +1,5 @@
 import os
+import shutil
 from youtube_dl import YoutubeDL
 
 
@@ -10,7 +11,7 @@ class Downloader:
         desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
         self.folderName = "Music_Downloads"
 
-        self.downloadPath = desktop + self.folderName
+        self.downloadPath = desktop + "/" + self.folderName
         self.ffmpegPath = "c:/Users/Xavi/Downloads/ffmpeg-5.1-essentials_build/bin"
         self.options = {
             "format": "bestaudio/best",
@@ -43,8 +44,9 @@ class Downloader:
 
         if rename:
             new_path = self.cwd + "/" + output + ".mp4"
-            os.rename(self.cwd+ "/" + new, new_path)
+            os.rename(self.cwd + "/" + new, new_path)
 
+        self.move(output+".mp4", new_path)
 
         return True
 
@@ -62,6 +64,17 @@ class Downloader:
 
         return new[0]
 
+    def move(self, file_name, path):
+        dest = self.downloadPath + "/" + file_name
+
+        dest = dest.replace("\\", "/")
+        path = path.replace("\\", "/")
+
+        os.mkdir("C:/Users/Xavi/Desktop/Music_Downloads")
+        os.rename(path, dest)
+        #os.replace(path, dest)
+        #shutil.move(path, dest)
+
 
 class DownloaderError(Exception):
     def __init__(self, message):
@@ -70,4 +83,4 @@ class DownloaderError(Exception):
 
 if __name__ == '__main__':
     down = Downloader()
-    down.download("https://www.youtube.com/watch?v=BaW_jenozKc")
+    down.download("https://www.youtube.com/watch?v=BaW_jenozKc", rename=True, output="test")
