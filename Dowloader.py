@@ -25,10 +25,9 @@ class Downloader:
         self.audio_downloader = YoutubeDL(self.options)
         self.dir = []
 
-    def download(self, url, full=True, rename=False):
+    def download(self, url, full=True, rename=False, output="N/A"):
 
-        if rename:
-            self.snapshot()
+        self.snapshot()
 
         try:
             if not full:
@@ -38,11 +37,23 @@ class Downloader:
         except ValueError:
             return False
 
+        new = self.findNew()
+
         return True
 
     def snapshot(self):
         mypath = os.getcwd()
         self.dir = [f for f in os.listdir(mypath) if os.path.isfile(os.path.join(mypath, f))]
+
+    def findNew(self):
+        temp = self.dir
+        self.snapshot()
+
+        new = set(temp) & set(self.dir)
+
+        return new[0]
+
+
 
 if __name__ == '__main__':
     down = Downloader()
