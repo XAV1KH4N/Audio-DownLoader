@@ -4,6 +4,9 @@ from youtube_dl import YoutubeDL
 
 class Downloader:
     def __init__(self):
+
+        print('Youtube Downloader'.center(40, '_'))
+
         desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
         self.folderName = "Music_Downloads"
 
@@ -24,13 +27,19 @@ class Downloader:
     def download(self, url, full=True):
 
         try:
-            print('Youtube Downloader'.center(40, '_'))
 
-            # URL = input('Enter youtube url :  ')
-            URL = "https://www.youtube.com/watch?v=BaW_jenozKc"
+            if not full:
+                url = "https://www.youtube.com/watch?v=" + url
 
-            self.audio_downloader.extract_info(URL)
+            self.audio_downloader.extract_info(url)
 
-        except:
 
-            print("Couldn\'t download the audio")
+        except ValueError:
+
+            return False
+
+        return True
+
+if __name__ == '__main__':
+    down = Downloader()
+    down.download("BaW_jenozKc", False)
