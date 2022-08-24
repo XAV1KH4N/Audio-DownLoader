@@ -54,8 +54,12 @@ class Downloader:
         return new[0]
 
 
+class DownloaderError(Exception):
+    def __init__(self, message):
+        self.super()
+        self.message = message
+
 
 if __name__ == '__main__':
     down = Downloader()
     down.snapshot()
-
