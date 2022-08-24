@@ -1,6 +1,7 @@
 import os
 from youtube_dl import YoutubeDL
 
+
 class Downloader:
     def __init__(self):
         desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
@@ -20,26 +21,16 @@ class Downloader:
 
         self.audio_downloader = YoutubeDL(self.options)
 
-    def 
-while True:
+    def download(self, url, full=True):
 
-    try:
-        print('Youtube Downloader'.center(40, '_'))
+        try:
+            print('Youtube Downloader'.center(40, '_'))
 
-        # URL = input('Enter youtube url :  ')
-        URL = "https://www.youtube.com/watch?v=BaW_jenozKc"
+            # URL = input('Enter youtube url :  ')
+            URL = "https://www.youtube.com/watch?v=BaW_jenozKc"
 
-        audio_downloader.extract_info(URL)
+            self.audio_downloader.extract_info(URL)
 
-    except Exception:
+        except:
 
-        print("Couldn\'t download the audio")
-
-    finally:
-
-        # option = int(input('\n1.download again \n2.Exit\n\nOption here :'))
-
-        option = 2
-
-        if option != 1:
-            break
+            print("Couldn\'t download the audio")
