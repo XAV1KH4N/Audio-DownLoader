@@ -24,6 +24,7 @@ class Downloader:
 
         self.audio_downloader = YoutubeDL(self.options)
         self.dir = []
+        self.cwd = os.getcwd()
 
     def download(self, url, full=True, rename=False, output="N/A"):
 
@@ -38,28 +39,35 @@ class Downloader:
             return False
 
         new = self.findNew()
+        new_path = self.cwd + "/" + new
+
+        if rename:
+            new_path = self.cwd + "/" + output + ".mp4"
+            os.rename(self.cwd+ "/" + new, new_path)
+
 
         return True
 
     def snapshot(self):
-        mypath = os.getcwd()
-        self.dir = [f for f in os.listdir(mypath) if os.path.isfile(os.path.join(mypath, f))]
+        self.dir = [f for f in os.listdir(self.cwd) if os.path.isfile(os.path.join(self.cwd, f))]
 
     def findNew(self):
         temp = self.dir
         self.snapshot()
 
-        new = set(temp) & set(self.dir)
+        new = list(set(self.dir) - set(temp))
+
+        if len(new) != 1:
+            raise DownloaderError("Downloaded file could not be found")
 
         return new[0]
 
 
 class DownloaderError(Exception):
     def __init__(self, message):
-        self.super()
         self.message = message
 
 
 if __name__ == '__main__':
     down = Downloader()
-    down.snapshot()
+    down.download("https://www.youtube.com/watch?v=BaW_jenozKc")
