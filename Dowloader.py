@@ -23,19 +23,28 @@ class Downloader:
         }
 
         self.audio_downloader = YoutubeDL(self.options)
+        self.dir = []
 
-    def download(self, url, full=True):
+    def download(self, url, full=True, rename=False):
+
+        if rename:
+            self.snapshot()
 
         try:
-
             if not full:
                 url = "https://www.youtube.com/watch?v=" + url
-
             self.audio_downloader.extract_info(url)
 
-
         except ValueError:
-
             return False
 
         return True
+
+    def snapshot(self):
+        mypath = os.getcwd()
+        self.dir = [f for f in os.listdir(mypath) if os.path.isfile(os.path.join(mypath, f))]
+
+if __name__ == '__main__':
+    down = Downloader()
+    down.snapshot()
+
