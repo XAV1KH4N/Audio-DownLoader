@@ -1,5 +1,4 @@
 import os
-from youtube_dl import YoutubeDL
 
 
 class Downloader:
