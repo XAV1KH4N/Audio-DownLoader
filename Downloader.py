@@ -5,8 +5,6 @@ from YouDL import YouDL
 class Downloader:
     def __init__(self):
 
-        print('Youtube Downloader'.center(40, '_'))
-
         desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
 
         self.folderName = "Music_Downloads"
