@@ -11,9 +11,13 @@ class CMDInterface(Interface):
             response = input(": ")
 
             if response == "1":
-                pass
+                self.downloadSong()
             elif response == "2":
                 pass
+
+    def downloadSong(self):
+        title = input("Song name: ")
+        self.download(title)
 
     def start(self):
         print('Youtube Downloader'.center(40, '_'))
@@ -22,3 +26,8 @@ class CMDInterface(Interface):
         print("1) Download Song")
         print("2) Set Download Path")
         print("9) Exit")
+
+if __name__ == '__main__':
+    cmd = CMDInterface()
+    cmd.main()
+
