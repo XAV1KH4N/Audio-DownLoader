@@ -17,7 +17,11 @@ class CMDInterface(Interface):
 
     def downloadSong(self):
         title = input("Song name: ")
-        self.download(title)
+        try:
+            self.download(title)
+        except KeyboardInterrupt:
+            print("Aborted Download")
+
 
     def start(self):
         print('Youtube Downloader'.center(40, '_'))

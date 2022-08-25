@@ -9,3 +9,8 @@ class Interface:
 
     def changeDownloadPath(self, path):
         self.manager.setPath(path)
+
+
+class InterfaceError(Exception):
+    def __init__(self, message):
+        self.message = message
