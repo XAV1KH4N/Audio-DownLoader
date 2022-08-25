@@ -1,5 +1,6 @@
 import os
 
+from Downloader import Downloader
 from Interface import Interface
 from flask import Flask, render_template, request, send_file
 
@@ -22,7 +23,9 @@ def download():
 
 @app.route('/send', methods=['POST','GET'])
 def download_file():
-    return send_file("static/file.txt", as_attachment=True)
+    d = Downloader()
+    path = d.downloadPath + "/riptide.mp4"
+    return send_file(path, as_attachment=True)
 
 
 if __name__ == "__main__":

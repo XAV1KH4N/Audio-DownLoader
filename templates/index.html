@@ -11,9 +11,8 @@
     <button type="submit">Download</button>
 </form>
 
-    <a href="{{ url_for('.download_file') }}">Download</a>
-
 {% if download %}
+    <a href="{{ url_for('.download_file') }}">Ready to download</a>
 <a>{{download}}</a>
 {% endif %}
 
