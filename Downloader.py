@@ -44,12 +44,13 @@ class Downloader:
         return True
 
     def purge(self):
-        print("Purging")
         files = self.getFiles()
         for file in files:
             ext = file.split(".")[-1]
             if ext != "py":
-                os.remove(self.cwd + "/" + file)
+                del_path = self.cwd + "/" + file
+                os.remove(del_path)
+                print("Deleting ", del_path)
 
     def snapshot(self):
         self.dir = self.getFiles()

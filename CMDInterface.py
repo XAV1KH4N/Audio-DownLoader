@@ -15,6 +15,8 @@ class CMDInterface(Interface):
                 self.downloadSong()
             elif response == "2":
                 pass
+            elif response == "3":
+                self.manager.purge()
 
     def downloadSong(self):
         title = input("Song name: ")
@@ -33,6 +35,7 @@ class CMDInterface(Interface):
     def menu(self):
         print("1) Download Song")
         print("2) Set Download Path")
+        print("3) Purge")
         print("9) Exit\n")
 
 if __name__ == '__main__':

@@ -12,3 +12,6 @@ class Manager:
 
     def setPath(self, path):
         self.down.setPath(path)
+
+    def purge(self):
+        self.down.purge()
