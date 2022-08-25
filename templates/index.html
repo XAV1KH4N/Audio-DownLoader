@@ -3,12 +3,19 @@
     <title>Music Downloader</title>
 </head>
 <body>
-    <h2>Music Downloader</h2>
+<h2>Music Downloader</h2>
 
-    <form action="/submit">
-      <label for="fname">Song Name</label>
-      <input type="text" id="fname">
-    </form>
+<form action="/download" method="POST">
+    <label for="song">Song Name</label>
+    <input type="text" name="song" id="song">
+    <button type="submit">Download</button>
+</form>
+
+    <a href="{{ url_for('.download_file') }}">Download</a>
+
+{% if download %}
+<a>{{download}}</a>
+{% endif %}
 
 </body>
 </html>
