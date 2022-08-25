@@ -9,3 +9,6 @@ class Manager:
     def download(self, title):
         sid = self.search.search(title)
         self.down.download(sid, False, True, title)
+
+    def setPath(self, path):
+        self.down.setPath(path)

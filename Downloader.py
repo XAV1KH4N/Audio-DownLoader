@@ -18,6 +18,9 @@ class Downloader:
         self.dir = []
         self.cwd = os.getcwd()
 
+    def setPath(self):
+        self.downloadPath = path
+
     def download(self, url, full=True, rename=False, output="N/A"):
 
         self.snapshot()
