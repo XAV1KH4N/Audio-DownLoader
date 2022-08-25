@@ -1,6 +1,10 @@
-import Search
-import Dowloader
+from Search import Search
+from Downloader import Downloader
 
 class Manager:
     def __init__(self):
-        pass
+        self.search = Search()
+        self.down = Downloader()
+
+
+
