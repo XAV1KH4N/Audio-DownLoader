@@ -3,17 +3,15 @@ import threading
 
 
 class Thread(threading.Thread):
-    def __init__(self, name, manager):
+    def __init__(self, name, manager, title):
         threading.Thread.__init__(self)
         self.name = name
         self.manager = manager
+        self.title = title
 
-    def run(self, title=False):
-        if not title:
-            return
-
+    def run(self):
         try:
-            self.manager.download(title)
+            self.manager.download(self.title)
         finally:
             print('ended')
 

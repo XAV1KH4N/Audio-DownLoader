@@ -17,13 +17,12 @@ class CMDInterface(Interface):
                 pass
 
     def downloadSong(self):
-        d_thread = Thread('Thread 1', self.manager)
-
         title = input("Song name: ")
-        d_thread.start()
-        d_thread.run(title)
 
-        #d_thread.raise_exception()
+        d_thread = Thread('Thread 1', self.manager, title)
+        d_thread.start()
+        input("FORCE STOP")
+        d_thread.raise_exception()
         d_thread.join()
 
     def start(self):
