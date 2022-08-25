@@ -7,7 +7,10 @@ class Downloader:
 
         print('Youtube Downloader'.center(40, '_'))
 
+        self.MAX_SIZE = 150
+
         desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
+
         self.folderName = "Music_Downloads"
         self.downloadPath = desktop + "/" + self.folderName
         self.downloadPath = self.clean(self.downloadPath)
