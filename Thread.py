@@ -3,20 +3,19 @@ import threading
 
 
 class Thread(threading.Thread):
-    def __init__(self, name):
+    def __init__(self, name, manager):
         threading.Thread.__init__(self)
         self.name = name
+        self.manager = manager
 
-        self.name = name
+    def run(self, title=False):
+        if not title:
+            return
 
-
-    def run(self):
         try:
-            pass
-            #func goes here
+            self.manager.download(title)
         finally:
             print('ended')
-
 
     def get_id(self):
         if hasattr(self, '_thread_id'):

@@ -1,3 +1,4 @@
+from Thread import Thread
 from Interface import Interface
 
 class CMDInterface(Interface):
@@ -16,12 +17,14 @@ class CMDInterface(Interface):
                 pass
 
     def downloadSong(self):
-        title = input("Song name: ")
-        try:
-            self.download(title)
-        except KeyboardInterrupt:
-            print("Aborted Download")
+        d_thread = Thread('Thread 1', self.manager)
 
+        title = input("Song name: ")
+        d_thread.start()
+        d_thread.run(title)
+
+        #d_thread.raise_exception()
+        d_thread.join()
 
     def start(self):
         print('Youtube Downloader'.center(40, '_'))
