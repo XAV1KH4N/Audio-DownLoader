@@ -13,15 +13,15 @@ class Thread(threading.Thread):
         try:
             self.manager.download(self.title)
         finally:
-            print('ended')
+            print('\n**Ended - Hit Enter')
 
     def get_id(self):
         if hasattr(self, '_thread_id'):
             return self._thread_id
 
-        for id, thread in threading._active.items():
+        for tid, thread in threading._active.items():
             if thread is self:
-                return id
+                return tid
 
     def raise_exception(self):
         thread_id = self.get_id()

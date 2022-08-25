@@ -20,9 +20,11 @@ class CMDInterface(Interface):
         title = input("Song name: ")
 
         d_thread = Thread('Thread 1', self.manager, title)
+        print("Press 'ENTER' to force quit during download")
         d_thread.start()
-        input("FORCE STOP")
-        d_thread.raise_exception()
+        input()
+        if d_thread.is_alive():
+            d_thread.raise_exception()
         d_thread.join()
 
     def start(self):
@@ -31,7 +33,7 @@ class CMDInterface(Interface):
     def menu(self):
         print("1) Download Song")
         print("2) Set Download Path")
-        print("9) Exit")
+        print("9) Exit\n")
 
 if __name__ == '__main__':
     cmd = CMDInterface()
