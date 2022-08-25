@@ -1,4 +1,5 @@
 import os
+from YouDL import YouDL
 
 
 class Downloader:
@@ -6,26 +7,14 @@ class Downloader:
 
         print('Youtube Downloader'.center(40, '_'))
 
-        self.MAX_SIZE = 150
-
         desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
 
         self.folderName = "Music_Downloads"
         self.downloadPath = desktop + "/" + self.folderName
         self.downloadPath = self.clean(self.downloadPath)
 
-        self.ffmpegPath = "c:/Users/Xavi/Downloads/ffmpeg-5.1-essentials_build/bin"
-        self.options = {
-            "format": "bestaudio/best",
-            "output": "test.mp3",
-            "ffmpeg_location": self.ffmpegPath,
-            'postprocessors': [{
-                'key': 'FFmpegExtractAudio',
-                'preferredcodec': 'mp3',
-            }],
-        }
+        self.audio_downloader = YouDL()
 
-        self.audio_downloader = YoutubeDL(self.options)
         self.dir = []
         self.cwd = os.getcwd()
 
@@ -86,8 +75,3 @@ class Downloader:
 class DownloaderError(Exception):
     def __init__(self, message):
         self.message = message
-
-
-if __name__ == '__main__':
-    down = Downloader()
-    down.download("https://www.youtube.com/watch?v=BaW_jenozKc", rename=True, output="test")

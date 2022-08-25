@@ -9,8 +9,3 @@ class Manager:
     def download(self, title):
         sid = self.search.search(title)
         self.down.download(sid, False, True, title)
-
-
-if __name__ == '__main__':
-    manager = Manager()
-    manager.download("house of memories")
