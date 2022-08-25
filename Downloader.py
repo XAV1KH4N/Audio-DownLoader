@@ -28,7 +28,7 @@ class Downloader:
                 url = "https://www.youtube.com/watch?v=" + url
             self.audio_downloader.extract_info(url)
 
-        except ValueError:
+        except:
             return False
 
         new = self.findNew()
@@ -40,10 +40,22 @@ class Downloader:
 
         self.move(output+".mp4", new_path)
 
+        self.purge()
         return True
 
+    def purge(self):
+        print("Purging")
+        files = self.getFiles()
+        for file in files:
+            ext = file.split(".")[-1]
+            if ext != "py":
+                os.remove(self.cwd + "/" + file)
+
     def snapshot(self):
-        self.dir = [f for f in os.listdir(self.cwd) if os.path.isfile(os.path.join(self.cwd, f))]
+        self.dir = self.getFiles()
+
+    def getFiles(self):
+        return [f for f in os.listdir(self.cwd) if os.path.isfile(os.path.join(self.cwd, f))]
 
     def findNew(self):
         temp = self.dir
@@ -67,7 +79,10 @@ class Downloader:
         except FileExistsError:
             pass
 
-        os.rename(path, dest)
+        try:
+            os.rename(path, dest)
+        except FileExistsError:
+            os.remove(path)
 
     def clean(self, path):
         return path.replace("\\", "/")

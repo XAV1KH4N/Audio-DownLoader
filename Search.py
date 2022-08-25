@@ -1,6 +1,7 @@
 import urllib.request
 import re
 
+
 class Search:
     def __init__(self):
         pass
