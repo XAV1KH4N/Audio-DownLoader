@@ -10,11 +10,5 @@
     <input type="text" name="song" id="song">
     <button type="submit">Download</button>
 </form>
-
-{% if download %}
-    <a href="{{ url_for('.download_file') }}">Ready to download</a>
-<a>{{download}}</a>
-{% endif %}
-
 </body>
 </html>

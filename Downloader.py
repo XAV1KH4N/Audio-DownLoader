@@ -5,16 +5,21 @@ from YouDL import YouDL
 class Downloader:
     def __init__(self):
 
-        desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
+        #desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
 
-        self.folderName = "Music_Downloads"
-        self.downloadPath = desktop + "/" + self.folderName
+        #self.folderName = "Music_Downloads"
+        #self.downloadPath = desktop + "/" + self.folderName
+
+        self.cwd = os.getcwd()
+
+        self.folderName = "downloads"
+        self.downloadPath = self.cwd + "/" + self.folderName
+
         self.downloadPath = self.clean(self.downloadPath)
 
         self.audio_downloader = YouDL()
 
         self.dir = []
-        self.cwd = os.getcwd()
 
     def setPath(self, path):
         self.downloadPath = path
