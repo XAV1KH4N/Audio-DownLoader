@@ -1,4 +1,5 @@
 import threading
+import time
 
 from Downloader import Downloader
 from Interface import Interface
@@ -8,7 +9,6 @@ from flask_socketio import SocketIO
 app = Flask(__name__)
 socketio = SocketIO(app)
 
-
 @app.route('/', methods=['POST', 'GET'])
 def index():
     return render_template('index.html')
@@ -16,29 +16,28 @@ def index():
 @app.route('/download', methods=['POST', 'GET'])
 def download():
     if request.method == "POST":
-        song = request.form['song']
-        if len(song) != 0:
+        title = request.form['title']
+        auth = request.form['by']
+        if len(title) != 0:
 
-            d = threading.Thread(target=thread_function, args=(1, song))
+            d = threading.Thread(target=thread_function, args=(1, title, auth))
             d.start()
 
-            return render_template('loading.html', song=song)
+            return render_template('loading.html', title=title)
 
     return render_template('index.html')
 
-@app.route('/send/<string:song>', methods=['POST','GET'])
-def download_file(song):
-    song = "/" + song + ".mp4"
+@app.route('/send/<string:title>', methods=['POST','GET'])
+def download_file(title, auth):
+    title = "/" + title + " " + auth + ".mp4"
     d = Downloader()
-    path = d.downloadPath + song
-    print("dp ", path)
+    path = d.downloadPath + title
     return send_file(path, as_attachment=True)\
 
-def thread_function(name, song):
+def thread_function(name, title, auth):
     interface = Interface()
-    interface.download(song)
-    socketio.emit('ready', {'data': 'got it!'})
-
+    interface.download(title, auth)
+    socketio.emit('ready', {'title': title, 'auth': auth})
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)

@@ -1,14 +1,16 @@
 <html>
 <head>
-    <title>Music Downloader</title>
+    <title>Audio Downloader</title>
 </head>
 <body>
-<h2>Music Downloader</h2>
+<h2>Audio Downloader</h2>
 
 <form action="/download" method="POST">
-    <label for="song">Song Name</label>
-    <input type="text" name="song" id="song">
-    <button type="submit">Download</button>
+    <input style="margin-top:10px" type="text" placeholder="Title" name="title" id="title" required>
+    <br>
+    <input style="margin-top:10px" type="text" placeholder="Author" name="by" id="by">
+    <br>
+    <button style="margin-top:10px" type="submit">Download</button>
 </form>
 
 </body>
