@@ -5,10 +5,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 </head>
 <body>
-<div class="container block" id="inputs">
+<div class="block" id="inputs">
     <form action="/download" method="POST">
         <h2>Audio Downloader</h2>
-
         <input style="margin-top:10px" type="text" placeholder="Title" name="title" id="title" required>
         <br>
         <input style="margin-top:10px" type="text" placeholder="Author" name="by" id="by">

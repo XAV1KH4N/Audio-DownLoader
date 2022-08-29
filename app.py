@@ -18,21 +18,20 @@ def download():
     if request.method == "POST":
         title = request.form['title'].strip()
         auth = request.form['by'].strip()
-        if len(title) != 0:
 
-            d = threading.Thread(target=thread_function, args=(title, auth))
-            d.start()
+        d = threading.Thread(target=thread_function, args=(title, auth))
+        d.start()
 
-            return render_template('loading.html', title=title, auth=auth)
+        return render_template('loading.html', title=title, auth=auth)
 
     return render_template('index.html')
 
 @app.route('/send/<string:title>/<string:auth>', methods=['POST','GET'])
 def download_file(title, auth):
-    if auth == None or len(auth) == 0 or auth == "":
+    if auth == "1":
         auth = ""
     else:
-        auth = " " + auth
+        auth = " " + auth[1:]
 
     title = "/" + title + auth + ".mp4"
     d = Downloader()

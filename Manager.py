@@ -7,8 +7,11 @@ class Manager:
         self.down = Downloader()
 
     def download(self, title, auth=None):
-        if auth != None:
-            title += " " + auth
+        if auth == None or len(auth) == 0 or auth == "":
+            pass
+        else:
+            title = title + " " + auth
+
         sid = self.search.search(title)
         self.down.download(sid, False, True, title)
 

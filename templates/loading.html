@@ -3,6 +3,7 @@
 <head>
     <title>Audio Downloader</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/general.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
             integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
             crossorigin="anonymous"></script>
@@ -14,9 +15,8 @@
 
         socket.on('ready', function (data) {
             if(title === data.title) {
-                document.getElementById("downloaddiv").style = "block"
-                document.getElementById("loadingtext").style = "none"
-                document.getElementById("wait").style = "none"
+                document.getElementById("downloaddiv").style.display = "block"
+                document.getElementById("loadingdiv").style.display = "none"
             }
         });
 
@@ -31,13 +31,24 @@
     </script>
 </head>
 <body>
-<a id="loadingtext">Preparing file</a>
-<span id="wait">.</span>
-<div id="downloaddiv" style="display:none">
-    <form action="/send/{{title}}/{{auth}}" method="POST">
-        <button type="submit">Download {{title}}</button>
-    </form>
+
+<div class="block" id="loadingdiv">
+    <a id="loadingtext">Preparing file</a>
+    <br>
+
+    <span id="wait">.</span>
 </div>
+
+<div class="block" id="downloaddiv" style="display:none">
+
+    <form action="/send/{{title}}/1{{auth}}" method="POST">
+        <a>Download Ready</a>
+        <br>
+        <button  style="margin-top:10px"; type="submit">Download {{title}}</button>
+    </form>
+
+</div>
+
 </body>
 </html>
 
