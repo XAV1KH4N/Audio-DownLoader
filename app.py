@@ -16,11 +16,11 @@ def index():
 @app.route('/download', methods=['POST', 'GET'])
 def download():
     if request.method == "POST":
-        title = request.form['title']
-        auth = request.form['by']
+        title = request.form['title'].strip()
+        auth = request.form['by'].strip()
         if len(title) != 0:
 
-            d = threading.Thread(target=thread_function, args=(1, title, auth))
+            d = threading.Thread(target=thread_function, args=(title, auth))
             d.start()
 
             return render_template('loading.html', title=title, auth=auth)
@@ -29,12 +29,17 @@ def download():
 
 @app.route('/send/<string:title>/<string:auth>', methods=['POST','GET'])
 def download_file(title, auth):
-    title = "/" + title + " " + auth + ".mp4"
+    if auth == None or len(auth) == 0 or auth == "":
+        auth = ""
+    else:
+        auth = " " + auth
+
+    title = "/" + title + auth + ".mp4"
     d = Downloader()
     path = d.downloadPath + title
     return send_file(path, as_attachment=True)\
 
-def thread_function(name, title, auth):
+def thread_function(title, auth):
     interface = Interface()
     interface.download(title, auth)
     socketio.emit('ready', {'title': title, 'auth': auth})
