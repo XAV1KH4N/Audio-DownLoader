@@ -19,17 +19,19 @@ def download():
         song = request.form['song']
         if len(song) != 0:
 
-            d = threading.Thread(target=thread_function, args=(1,song))
+            d = threading.Thread(target=thread_function, args=(1, song))
             d.start()
 
-            return render_template('loading.html', download=song)
+            return render_template('loading.html', song=song)
 
     return render_template('index.html')
 
-@app.route('/send', methods=['POST','GET'])
-def download_file(song="/riptide.mp4"):
+@app.route('/send/<string:song>', methods=['POST','GET'])
+def download_file(song):
+    song = "/" + song + ".mp4"
     d = Downloader()
     path = d.downloadPath + song
+    print("dp ", path)
     return send_file(path, as_attachment=True)\
 
 def thread_function(name, song):

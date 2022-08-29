@@ -2,18 +2,27 @@
 <html>
 <head>
     <title>Music Downloader</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
+            integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+            crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf-8">
         var socket = io();
 
         socket.on('ready', function (data) {
             console.log("Updated")
-            document.getElementById("downloadlink").style = "block"
+            document.getElementById("downloaddiv").style = "block"
+            document.getElementById("loadingtext").style = "none"
         });
+
     </script>
 </head>
 <body>
-    <a id="downloadlink" style="display:none" href="{{ url_for('.download_file') }}">Ready to download</a>
+<a id="loadingtext">Preparing file</a>
+<div id="downloaddiv" style="display:none">
+    <form action="/send/{{song}}" method="POST">
+        <button type="submit">Download {{song}}</button>
+    </form>
+</div>
 </body>
 </html>
 
