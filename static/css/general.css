@@ -1,3 +1,15 @@
 body {
+    background-color: #bb0d43;
+    color: white;
+    overflow:hidden;
+    font-family: 'Courier New', monospace;
 
 }
+
+.block {
+        padding: 10px;
+        text-align: center;
+        width: 100%;
+        box-shadow: 1px 1px 5px #ab0033
+}
+

@@ -1,0 +1,11 @@
+#inputs {
+    background-color: #181924;
+}
+
+.grid {
+    width: 100%;
+    height: 150px;
+    display: grid;
+    grid-template-columns: 23% 75%;
+    grid-gap: 10px;
+}

@@ -1,17 +1,21 @@
 <html>
 <head>
     <title>Audio Downloader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/general.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 </head>
 <body>
-<h2>Audio Downloader</h2>
+<div class="container block" id="inputs">
+    <form action="/download" method="POST">
+        <h2>Audio Downloader</h2>
 
-<form action="/download" method="POST">
-    <input style="margin-top:10px" type="text" placeholder="Title" name="title" id="title" required>
-    <br>
-    <input style="margin-top:10px" type="text" placeholder="Author" name="by" id="by">
-    <br>
-    <button style="margin-top:10px" type="submit">Download</button>
-</form>
+        <input style="margin-top:10px" type="text" placeholder="Title" name="title" id="title" required>
+        <br>
+        <input style="margin-top:10px" type="text" placeholder="Author" name="by" id="by">
+        <br>
+        <button style="margin-top:10px" type="submit">Download</button>
+    </form>
+</div>
 
 </body>
 </html>
