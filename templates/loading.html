@@ -8,6 +8,7 @@
     <script type="text/javascript" charset="utf-8">
         var socket = io();
         var title = '{{title}}'
+        var auth = '{{auth}}'
 
         socket.on('ready', function (data) {
             if(title === data.title) {
@@ -21,7 +22,7 @@
 <body>
 <a id="loadingtext">Preparing file</a>
 <div id="downloaddiv" style="display:none">
-    <form action="/send/{{title}}" method="POST">
+    <form action="/send/{{title}}/{{auth}}" method="POST">
         <button type="submit">Download {{title}}</button>
     </form>
 </div>

@@ -10,7 +10,6 @@ class Manager:
         if auth != None:
             title += " " + auth
         sid = self.search.search(title)
-        print("sid", sid)
         self.down.download(sid, False, True, title)
 
     def setPath(self, path):

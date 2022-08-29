@@ -23,11 +23,11 @@ def download():
             d = threading.Thread(target=thread_function, args=(1, title, auth))
             d.start()
 
-            return render_template('loading.html', title=title)
+            return render_template('loading.html', title=title, auth=auth)
 
     return render_template('index.html')
 
-@app.route('/send/<string:title>', methods=['POST','GET'])
+@app.route('/send/<string:title>/<string:auth>', methods=['POST','GET'])
 def download_file(title, auth):
     title = "/" + title + " " + auth + ".mp4"
     d = Downloader()
