@@ -20,7 +20,6 @@
             }
         });
 
-
         var dots = window.setInterval( function() {
         var wait = document.getElementById("wait");
         if ( wait.innerHTML.length >= 4 )
@@ -30,7 +29,8 @@
         }, 200);
 
         function codeAddress() {
-            alert('ok');
+            socket.emit('notification', {message: 'I\'m connected!', url: location.href.toString()});
+        });
         }
         window.onload = codeAddress;
 

@@ -1,5 +1,4 @@
 import threading
-import time
 import webbrowser
 
 from Downloader import Downloader
@@ -7,12 +6,22 @@ from Interface import Interface
 from flask import Flask, render_template, request, send_file
 from flask_socketio import SocketIO
 
+from Manager import Manager
+from Thread import Thread
+from ThreadFactory import ThreadFactory
+
 app = Flask(__name__)
 socketio = SocketIO(app)
+tf = ThreadFactory(socketio)
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
     return render_template('index.html')
+
+@app.route('/notification')
+def notification():
+    print("Recieved notification")
+    return render_template('loading.html')
 
 @app.route('/download', methods=['POST', 'GET'])
 def download():
@@ -20,8 +29,12 @@ def download():
         title = request.form['title'].strip()
         auth = request.form['by'].strip()
         print("->", title)
-        d = threading.Thread(target=thread_function, args=(title, auth))
-        d.start()
+
+        #d = threading.Thread(target=thread_function, args=(title, auth))
+        #d.start()
+
+        d = Thread(1, Manager(), title, auth)
+        tf.add(d)
 
         return render_template('loading.html', title=title, auth=auth)
 
