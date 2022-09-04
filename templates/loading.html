@@ -14,13 +14,12 @@
         var auth = '{{auth}}'
 
         socket.on('ready', function (data) {
-            console.log(title, data.title)
-            console.log(auth, data.auth)
             if(title === data.title) {
                 document.getElementById("downloaddiv").style.display = "block"
                 document.getElementById("loadingdiv").style.display = "none"
             }
         });
+
 
         var dots = window.setInterval( function() {
         var wait = document.getElementById("wait");
@@ -29,6 +28,11 @@
         else
             wait.innerHTML += ".";
         }, 200);
+
+        function codeAddress() {
+            alert('ok');
+        }
+        window.onload = codeAddress;
 
     </script>
 </head>

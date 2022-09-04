@@ -1,5 +1,6 @@
 import threading
 import time
+import webbrowser
 
 from Downloader import Downloader
 from Interface import Interface
@@ -18,7 +19,7 @@ def download():
     if request.method == "POST":
         title = request.form['title'].strip()
         auth = request.form['by'].strip()
-
+        print("->", title)
         d = threading.Thread(target=thread_function, args=(title, auth))
         d.start()
 
@@ -43,6 +44,14 @@ def thread_function(title, auth):
     interface.download(title, auth)
     socketio.emit('ready', {'title': title, 'auth': auth})
 
+def open_page_thread():
+    webbrowser.open('http://127.0.0.1:5000')  # Go to example.com
+
+def open_page():
+    d = threading.Thread(target=open_page_thread, args=())
+    d.start()
+
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=True)
+    open_page()
+    app.run(debug=True)
     socketio.run(app)
