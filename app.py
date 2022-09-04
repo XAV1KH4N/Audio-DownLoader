@@ -20,7 +20,7 @@ def index():
 
 @socketio.on('check_down')
 def handle_notification_event(data: dict):
-    print("Thread State: ",tf.check(data["title"], data["auth"]))
+    print("Thread State: ", tf.check(data["title"], data["auth"]))
 
 @app.route('/download', methods=['POST', 'GET'])
 def download():

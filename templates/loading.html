@@ -20,6 +20,11 @@
             }
         });
 
+        socket.on('failed', function (data) {
+             alert("Failed to download, returning home")
+             document.getElementById("home").submit();
+        });
+
         var dots = window.setInterval( function() {
         var wait = document.getElementById("wait");
         if ( wait.innerHTML.length >= 4 )
@@ -52,6 +57,7 @@
         <br>
         <button  style="margin-top:10px"; type="submit">Download {{title}}</button>
     </form>
+    <form id="home" action="/" method="post"></form>
 
 </div>
 
