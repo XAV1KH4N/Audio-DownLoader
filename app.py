@@ -1,4 +1,6 @@
+import os
 import threading
+import time
 import webbrowser
 
 from Downloader import Downloader
@@ -45,7 +47,15 @@ def download_file(title, auth):
     title = "/" + title + auth + ".mp4"
     d = Downloader()
     path = d.downloadPath + title
+
+    d = threading.Thread(target=delete_old, args=(path,))
+    d.start()
+
     return send_file(path, as_attachment=True)\
+
+def delete_old(path):
+    time.sleep(1)
+    os.remove(path)
 
 def thread_function(title, auth):
     interface = Interface()
