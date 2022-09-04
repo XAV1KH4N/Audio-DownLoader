@@ -1,6 +1,5 @@
 import ctypes
 import threading
-from flask_socketio import SocketIO
 
 class Thread(threading.Thread):
     def __init__(self, name, manager, title, auth):
@@ -17,12 +16,11 @@ class Thread(threading.Thread):
         try:
             self.manager.download(self.title, self.auth)
             self.socketio.emit('ready', {'title': self.title, 'auth': self.auth})
-            print("Emitted")
         except:
             self.socketio.emit('failed', {'title': self.title, 'auth': self.auth})
             print("failed")
         finally:
-            print("final")
+            pass
 
     def get_id(self):
         if hasattr(self, '_thread_id'):
@@ -39,6 +37,12 @@ class Thread(threading.Thread):
         if res > 1:
             ctypes.pythonapi.PyThreadState_SetAsyncExc(thread_id, 0)
             print('Exception raise failure')
+
+    def equals(self, title, auth):
+        return self.title == title and self.auth == auth
+
+
+
 
 
 

@@ -29,9 +29,9 @@
         }, 200);
 
         function codeAddress() {
-            socket.emit('notification', {message: 'I\'m connected!', url: location.href.toString()});
-        });
+            socket.emit('check_down', {title: title, auth: auth } );
         }
+
         window.onload = codeAddress;
 
     </script>

@@ -18,20 +18,15 @@ tf = ThreadFactory(socketio)
 def index():
     return render_template('index.html')
 
-@app.route('/notification')
-def notification():
-    print("Recieved notification")
-    return render_template('loading.html')
+@socketio.on('check_down')
+def handle_notification_event(data: dict):
+    print("Thread State: ",tf.check(data["title"], data["auth"]))
 
 @app.route('/download', methods=['POST', 'GET'])
 def download():
     if request.method == "POST":
         title = request.form['title'].strip()
         auth = request.form['by'].strip()
-        print("->", title)
-
-        #d = threading.Thread(target=thread_function, args=(title, auth))
-        #d.start()
 
         d = Thread(1, Manager(), title, auth)
         tf.add(d)
@@ -65,6 +60,6 @@ def open_page():
     d.start()
 
 if __name__ == "__main__":
-    open_page()
+    #open_page()
     app.run(debug=True)
     socketio.run(app)

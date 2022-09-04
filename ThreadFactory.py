@@ -8,6 +8,8 @@ class ThreadFactory:
         thread.addSocket(self.socketio)
         thread.start()
 
-    def view(self):
+    def check(self, title, auth):
         for t in self.threads:
-            print(t.name)
+            if t.equals(title, auth) and t.isAlive():
+                return True
+        return False
